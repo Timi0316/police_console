@@ -1,20 +1,13 @@
+package com.team.cn.vo;
+
 /**
  * Created by qiuwei on 2016/3/3.
  */
-public class User {
-    private int id;
+public class UserVo {
 
     private String name;
 
     private String password;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

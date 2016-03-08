@@ -11,5 +11,12 @@
 
     <artifactId>police-common</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.jodd</groupId>
+            <artifactId>jodd-bean</artifactId>
+            <version>3.6.5</version>
+        </dependency>
+    </dependencies>
 
 </project>

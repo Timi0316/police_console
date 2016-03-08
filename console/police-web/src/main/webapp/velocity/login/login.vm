@@ -1,15 +1,25 @@
+<!DOCTYPE html>
 <html>
-<h1>login page</h1>
-<div>login Result : </div>
-<div>
-    <div>
-        <label>用户ID：#user.id</label>
-    </div>
-    <div>
-        <label>用户名：#user.name</label>
-    </div>
-    <div>
-        <label>用户密码：#user.password</label>
-    </div>
+<head>
+    <title>System Console</title>
+    #parse('/layout/header.vm')
+    <link href="#springUrl('/css/business/admin/signin.css')" rel="stylesheet"/>
+</head>
+
+<body>
+
+<div class="container">
+
+    <form class="form-signin" action="#springUrl('/index.htm')" method="post">
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="text" name="name" class="form-control" placeholder="User Name" required="" autofocus="true">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Password" required="">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+    </form>
+
 </div>
+
+</body>
+    #parse('/layout/footer.vm')
 </html>

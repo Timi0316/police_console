@@ -8,16 +8,12 @@
 		http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
-    <context:annotation-config/>
-
-    <!--<context:component-scan base-package="com.policeteam.console.dal" />-->
-
     <context:property-placeholder location="classpath:/jdbc/jdbc.properties"/>
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${driver}"/>
         <property name="url" value="${url}"/>
-        <property name="username" value="${loginname}"/>
+        <property name="username" value="${name}"/>
         <property name="password" value="${password}"/>
         <property name="initialSize" value="${initialSize}"/>
         <property name="maxActive" value="${maxActive}"/>
@@ -27,10 +23,20 @@
         <!--<property name="validationQuery" value="select 1"/>-->
     </bean>
 
-
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="configLocation" value="classpath:/mybatis/mybatis.xml" />
         <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!--<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+        <!--<property name="mapperInterface" value="com.team.cn.mapper.UserEntityMapper"></property>-->
+        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>-->
+    <!--</bean>-->
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.team.cn.mapper" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
 
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">

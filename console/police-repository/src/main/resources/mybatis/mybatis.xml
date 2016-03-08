@@ -4,8 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-
-    <settings>
+	<settings>
         <!-- 设置超时时间，它决定驱动等待一个数据库响应的时间 -->
         <setting name="defaultStatementTimeout" value="60000" />
         <!-- 启用或禁用 缓存 -->
@@ -40,8 +39,9 @@
 	    </plugin>
 	</plugins>
 
+
     <mappers>
-		<mapper resource="mybatis/mapper/UserEntityMapper.xml" />
+		<mapper resource="/mybatis/mapper/UserEntityMapper.xml" />
     </mappers>
 	
 </configuration>

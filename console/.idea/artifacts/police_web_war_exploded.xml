@@ -55,6 +55,8 @@
           <element id="archive" name="police-common-1.0-SNAPSHOT.jar">
             <element id="module-output" name="police-common" />
           </element>
+          <element id="library" level="project" name="Maven: org.jodd:jodd-bean:3.6.5" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-core:3.6.5" />
           <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context-support:4.1.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context:4.1.6.RELEASE" />
