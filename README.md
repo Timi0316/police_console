@@ -23,6 +23,10 @@
       4.1 双击console选项下面的lifecycle下的install
       
       4.2 双击police-web下的plugins的jetty：run
+    
+    TODO  
+    
+    ellipse暂时没有使用，大概要在Goals中配置clean jetty:run，具体没实验过，使用过的同学补充完善。
       
   5 浏览器中输入localhost：8082/police-web,进入登录页，输入用户账户如admin（密码：admin）
  
