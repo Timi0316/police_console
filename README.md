@@ -43,3 +43,25 @@
   police-config：配置文件
   
   police-common：domain和util类等
+  
+  
+
+git分支管理
+  
+  
+  1 从远程下载成功，即git clone
+  
+  2 创建本地新分支，如：git checkout -b police_dev
+  
+  3 开发时切换到分支开发，如：git checkout police_dev
+  
+  4 开发完成之后，保存到本地，如：git add .  git commit -m 'the submit descrpition'
+  
+  5 切换到master分支 ，如：git checkout master 。 
+  
+  6 从远程pull代码， 保持master分支，是最新代码，如：git pull 
+  
+  7 将开发分支的内容merge到master， 如：git merge police_dev
+  
+  8 提交到远程github上，如：git push origin master
+  
