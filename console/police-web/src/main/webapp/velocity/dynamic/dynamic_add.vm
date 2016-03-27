@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>System Console</title>
+    #parse('/layout/content_css.vm')
+    <link href="#springUrl('/css/business/content.css')" rel="stylesheet"/>
+</head>
+
+<body role="document">
+<!-- head-->
+    #parse('/layout/head.vm')
+<!-- left -->
+    #parse('/layout/nav_left.vm')
+
+<!--content -->
+<div class="content">
+    <div class="page-header">
+        <h1>
+            警务动态 > 添加
+        </h1>
+    </div>
+    <form action="#springUrl('/dynamic/add_next.htm')" method="post">
+        <div class="title">
+            <div class="form-group">
+                <label for="title">标题</label>
+                <input name="title" type="text" class="form-control" id="title"
+                       placeholder="请输入标题">
+            </div>
+        </div>
+        <div class="content">
+            <div class="form-group">
+                <label for="content">内容</label>
+                <textarea name="content" class="form-control" id="content"></textarea>
+            </div>
+
+        </div>
+        <div class="button">
+            <button class="btn" type="submit">下一步</button>
+            <button class="btn" type="button" onclick="history.back()">取消</button>
+        </div>
+    </form>
+</div>
+
+<!-- js -->
+    #parse('/layout/content_js.vm')
+<script src="#springUrl('/js/business/dynamic/dynamic.js')"></script>
+</body>
+</html>

@@ -181,6 +181,27 @@ public class ConsoleUtils {
         return targetInstance;
     }
 
+    /**
+     * 拷贝相同的属性，如果属性源的属性值为空就不用拷贝。
+     * 如果属性名以　_ 或者　$ 开头会被忽略。
+     */
+    public static <T> T copySameProperties(Object source, Class<T> targetClass, String... excludeProperties) {
+        String[] excludes = getExcludes(source, excludeProperties);
+        T destination = null;
+        try {
+            destination = targetClass.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        BeanCopy.beans(source, destination)
+                .ignoreNulls(true)
+                .exclude(excludes)
+                .copy();
+        return destination;
+    }
+
     public static String formateBigDecimal(BigDecimal bigDecimal) {
         bigDecimal.setScale(4, BigDecimal.ROUND_HALF_UP);
         return bigDecimal.toString();

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>System Console</title>
+    #parse('/layout/content_css.vm')
+    <link href="#springUrl('/css/business/content.css')" rel="stylesheet"/>
+</head>
+
+<body role="document">
+<!-- head-->
+    #parse('/layout/head.vm')
+<!-- left -->
+    #parse('/layout/nav_left.vm')
+
+<!--content -->
+<div class="content">
+    <div class="page-header">
+        <h1>
+            警务动态 > 添加
+        </h1>
+    </div>
+    <form action="#springUrl('/dynamic/dynamic_add_submit.htm')" method="post" enctype="multipart/form-data">
+        <div class="title">
+            <div class="form-group">
+                <label for="title">标题</label>
+                <input name="title" type="text" class="form-control" id="title"
+                       value="$!{dynamic.title}">
+            </div>
+        </div>
+        <div class="image">
+
+            <div class="form-group">
+                <label for="image">图片</label>
+                <div>
+                    <img src="" id="dynamic_img">
+                </div>
+                <input type="file"  name="imageFile" id="dynamic_image_file" onchange="addImage('dynamic_image_file','dynamic_img');">
+            </div>
+        </div>
+        <div class="content">
+            <div class="form-group">
+                <label for="content">内容</label>
+                <textarea name="content" class="form-control" id="content" >$!{dynamic.content}</textarea>
+            </div>
+
+        </div>
+        <div class="button">
+            <button class="btn" type="submit">提交</button>
+            <button class="btn" type="button" onclick="history.back()">上一步</button>
+        </div>
+    </form>
+</div>
+
+<!-- js -->
+    #parse('/layout/content_js.vm')
+<script src="#springUrl('/js/business/dynamic/dynamic.js')"></script>
+<script src="#springUrl('/js/business/dynamic/base.js')"></script>
+</body>
+</html>

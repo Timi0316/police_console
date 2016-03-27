@@ -1,0 +1,14 @@
+<div class="container-fluid pull-left">
+    <div class="row-fluid">
+        <div class="span4">
+            <div class="list-group">
+                <li class="list-group-item "><a href="#springUrl('/dynamic/find.htm')">警务动态</a></li>
+                <li class="list-group-item"><a href="#springUrl('/roll/find.htm')">荣誉榜</a></li>
+                <li class="list-group-item"><a href="#springUrl('/notice/find.htm')">通知公告</a></li>
+                <li class="list-group-item"><a href="#springUrl('/news/find.htm')">军报速递</a></li>
+                <li class="list-group-item"><a href="#springUrl('/years/find.htm')">关辉岁月</a></li>
+                <li class="list-group-item"><a href="#springUrl('/bar/find.htm')">警营心声</a></li>
+            </div>
+        </div>
+    </div>
+</div>

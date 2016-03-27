@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>System Console</title>
-    #parse('/layout/header.vm')
+    #parse("/layout/content_css.vm")
     <link href="#springUrl('/css/business/admin/signin.css')" rel="stylesheet"/>
 </head>
 
@@ -21,11 +20,5 @@
 </div>
 
 </body>
-    #parse('/layout/footer.vm')
-<script>
-    var msg = '${message}';
-    if (msg != '' && msg.length > 0) {
-        $.messager.popup(msg);
-    }
-</script>
+    #parse("/layout/content_js.vm")
 </html>

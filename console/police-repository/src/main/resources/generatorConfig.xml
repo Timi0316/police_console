@@ -36,7 +36,7 @@
             <property name="enableSubPackages" value="true" />  
         </javaClientGenerator>  
   
-        <table tableName="police_admin_user" domainObjectName="UserEntity">
+        <table tableName="police_dynamic_cond" domainObjectName="DynamicEntity">
         </table>  
   
     </context>  

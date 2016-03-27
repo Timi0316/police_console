@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team.cn.mapper.DynamicEntityMapper" >
+
+  <resultMap id="BaseResultMap" type="com.team.cn.entity.DynamicEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    id, title, image_url, date, created_time, updated_time
+  </sql>
+
+  <select id="selectDynamicByPage" parameterType="java.util.HashMap" resultType="com.team.cn.entity.DynamicEntity">
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM
+      police_dynamic_cond
+    WHERE
+      1 = 1
+      <if test="beginDate != null">
+        AND date >= #{beginDate}
+      </if>
+    <if test="endDate != null">
+      AND
+      <![CDATA[
+      date <= #{endDate}
+    ]]>
+    </if>
+    LIMIT #{pageNo},#{pageSize}
+  </select>
+
+  <select id="selectSizeByPage" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+    SELECT
+      count(*)
+    FROM
+            police_dynamic_cond
+    WHERE
+      1 = 1
+    <if test="beginDate != null">
+      AND date >= #{beginDate}
+    </if>
+    <if test="endDate != null">
+      AND
+      <![CDATA[
+      date <= #{endDate}
+    ]]>
+    </if>
+  </select>
+
+  <insert id="insertDynamic" parameterType="com.team.cn.entity.DynamicEntity">
+    INSERT INTO police_dynamic_cond
+    (
+    title,
+    image_url,
+    content,
+    date,
+    created_time,
+    updated_time
+    )
+    VALUE
+    (
+     #{title},
+     #{imageUrl},
+     #{content},
+     #{date},
+     now(),
+     now()
+    )
+
+  </insert>
+
+  <select id="selectDynamicById" parameterType="java.lang.String" resultType="com.team.cn.entity.DynamicEntity">
+    SELECT
+      id,
+      title,
+      image_url as imageUrl,
+      date,
+      content,
+      created_time as createdTime,
+      updated_time as updatedTime
+    FROM
+      police_dynamic_cond
+    WHERE
+      id = #{id}
+  </select>
+
+  <update id="updateDynamic" parameterType="com.team.cn.entity.DynamicEntity">
+    UPDATE police_dynamic_cond
+    SET
+      title = #{title},
+      image_url = #{imageUrl},
+      content = #{content},
+      date = #{date},
+      updated_time = now()
+    WHERE
+      id = #{id}
+  </update>
+
+  <delete id="deleteDynamicById" parameterType="java.lang.String">
+    DELETE FROM
+      police_dynamic_cond
+    WHERE
+      id = #{id}
+  </delete>
+</mapper>

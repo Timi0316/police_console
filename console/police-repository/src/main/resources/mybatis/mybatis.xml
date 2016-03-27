@@ -39,9 +39,9 @@
 	    </plugin>
 	</plugins>
 
-
     <mappers>
 		<mapper resource="/mybatis/mapper/UserEntityMapper.xml" />
+		<mapper resource="/mybatis/mapper/DynamicEntityMapper.xml" />
     </mappers>
 	
 </configuration>
