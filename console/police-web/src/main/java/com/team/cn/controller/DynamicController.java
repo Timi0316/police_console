@@ -6,14 +6,12 @@ import com.team.cn.utils.ConsoleUtils;
 import com.team.cn.vo.BaseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.Console;
 import java.io.IOException;
 import java.util.List;
 
@@ -27,12 +25,51 @@ public class DynamicController {
     @Autowired
     private DynamicService dynamicService;
 
-    @RequestMapping(value = "/find",method = RequestMethod.GET)
-    public ModelAndView find(ModelMap map) {
-        int size = dynamicService.selectDynamicSize(null, null, 10);
-        List<Dynamic> dynamicList =  dynamicService.selectDynamicByPage(null, null, 1, 10);
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    public ModelAndView index(ModelMap map) {
+        int size = dynamicService.selectDefalutSize();
+        List<Dynamic> dynamicList =  dynamicService.selectDefualtByPage();
         map.addAttribute("size", size);
         map.addAttribute("dynamicList", dynamicList);
+        map.addAttribute("pageNum",1);
+        return new ModelAndView("/dynamic/dynamic_index", map);
+    }
+
+    /**
+     * 搜索框
+     * @param beginDate
+     * @param endDate
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public ModelAndView search(String beginDate,String endDate,ModelMap map) {
+        int size = dynamicService.selectDynamicSize(beginDate,endDate);
+        List<Dynamic> dynamicList = dynamicService.selectDynamicByPage(beginDate, endDate, 1);
+        map.addAttribute("beginDate", beginDate);
+        map.addAttribute("endDate", endDate);
+        map.addAttribute("size", size);
+        map.addAttribute("dynamicList", dynamicList);
+        map.addAttribute("pageNum",1);
+        return new ModelAndView("/dynamic/dynamic_index", map);
+    }
+
+    /**
+     * 分页搜索
+     * @param beginDate
+     * @param endDate
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/page", method = RequestMethod.POST)
+    public ModelAndView page(String beginDate,String endDate,int pageNum, ModelMap map) {
+        int size = dynamicService.selectDynamicSize(beginDate,endDate);
+        List<Dynamic> dynamicList = dynamicService.selectDynamicByPage(beginDate, endDate, pageNum);
+        map.addAttribute("beginDate", beginDate);
+        map.addAttribute("endDate", endDate);
+        map.addAttribute("size", size);
+        map.addAttribute("dynamicList", dynamicList);
+        map.addAttribute("pageNum",pageNum);
         return new ModelAndView("/dynamic/dynamic_index", map);
     }
 
@@ -55,7 +92,7 @@ public class DynamicController {
     @RequestMapping(value = "/dynamic_add_submit", method = RequestMethod.POST)
     public String addDynamicSubmit(BaseVo baseVo, MultipartFile imageFile) throws IOException {
         dynamicService.addDynamic(ConsoleUtils.copySameProperties(baseVo,Dynamic.class),imageFile);
-        return ("redirect:/dynamic/find.htm");
+        return ("redirect:/dynamic/index.htm");
     }
 
 

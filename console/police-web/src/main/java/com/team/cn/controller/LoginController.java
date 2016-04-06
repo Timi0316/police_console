@@ -52,10 +52,11 @@ public class LoginController {
         }
         map.addAttribute("user", user);
 
-        int size = dynamicService.selectDynamicSize(null, null, 10);
-        List<Dynamic> dynamicList =  dynamicService.selectDynamicByPage(null, null, 1, 10);
+        int size = dynamicService.selectDefalutSize();
+        List<Dynamic> dynamicList =  dynamicService.selectDefualtByPage();
         map.addAttribute("size", size);
         map.addAttribute("dynamicList", dynamicList);
+        map.addAttribute("pageNum",1);
         return new ModelAndView("/dynamic/dynamic_index", map);
     }
 

@@ -1,14 +1,18 @@
-<div class="container-fluid pull-left">
-    <div class="row-fluid">
-        <div class="span4">
-            <div class="list-group">
-                <li class="list-group-item "><a href="#springUrl('/dynamic/find.htm')">警务动态</a></li>
-                <li class="list-group-item"><a href="#springUrl('/roll/find.htm')">荣誉榜</a></li>
-                <li class="list-group-item"><a href="#springUrl('/notice/find.htm')">通知公告</a></li>
-                <li class="list-group-item"><a href="#springUrl('/news/find.htm')">军报速递</a></li>
-                <li class="list-group-item"><a href="#springUrl('/years/find.htm')">关辉岁月</a></li>
-                <li class="list-group-item"><a href="#springUrl('/bar/find.htm')">警营心声</a></li>
-            </div>
-        </div>
+<script>
+    function setChoose(dom) {
+        $(dom).siblings().css("background-color","#ffffff")
+        $(dom).css("background-color","#9d9d9d");
+    }
+</script>
+<div class="panel panel-default ">
+    <div class="list-group">
+        <li class="list-group-item" onmouseover="setChoose($(this))"><a class="text-muted" href="#springUrl('/dynamic/index.htm')">警务动态</a></li>
+        <li class="list-group-item" onmouseover="setChoose($(this))"><a class="text-muted" href="#springUrl('/roll/index.htm')">荣誉榜</a></li>
+        <li class="list-group-item" onmouseover="setChoose($(this))"><a class="text-muted" href="#springUrl('/notice/index.htm')">通知公告</a></li>
+        <li class="list-group-item" onmouseover="setChoose($(this))"><a class="text-muted" href="#springUrl('/news/index.htm')">军报速递</a></li>
+        <li class="list-group-item" onmouseover="setChoose($(this))"><a class="text-muted" href="#springUrl('/years/index.htm')">关辉岁月</a></li>
+        <li class="list-group-item" onmouseover="setChoose($(this))"><a class="text-muted" href="#springUrl('/bar/index.htm')">警营心声</a></li>
     </div>
 </div>
+<script src="#springUrl('/js/widgets/bootstrap/jquery.min.js')"></script>
+<script src="#springUrl('/js/widgets/bootstrap/bootstrap.min.js')"></script>

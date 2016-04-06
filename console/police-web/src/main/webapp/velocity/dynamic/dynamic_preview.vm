@@ -10,44 +10,38 @@
 <!-- head-->
     #parse('/layout/head.vm')
 <!-- left -->
+<div class="col-md-3">
     #parse('/layout/nav_left.vm')
-
+</div>
 <!--content -->
-<div class="content">
+<div class="col-md-9 content">
     <div class="page-header">
         <h1>
-            警务动态 > 添加
+            警务动态 > 预览
         </h1>
     </div>
     <form action="#springUrl('/dynamic/dynamic_add_submit.htm')" method="post" enctype="multipart/form-data">
-        <div class="title">
+        <div class="col-md-9">
             <div class="form-group">
-                <label for="title">标题</label>
-
-            </div>
-            <div>
-                <label>
-                    $!{dynamic.title}
-                </label>
+               <h1> $!{dynamic.title}</h1>
             </div>
         </div>
-        <div class="image">
+        <div class="col-md-9">
             <div class="form-group">
                 <div>
-                   <img class="img-polaroid" src=#springUrl("/common/preview_image.htm?imageUrl=$!{dynamic.imageUrl}") />
+                    <img class="img-polaroid media-middle" src=#springUrl(
+                        "/common/preview_image.htm?imageUrl=$!{dynamic.imageUrl}") />
                 </div>
             </div>
         </div>
-        <div class="content">
+        <div class="col-md-9">
             <div class="form-group">
-                <label for="content">内容</label>
-            </div>
-            <div>
-                <label>$!{dynamic.content}</label>
+                $!{dynamic.content}
+##                <span class="label label-default ">$!{dynamic.content}</span>
             </div>
         </div>
-        <div class="button">
-            <button class="btn" type="button" onclick="history.back()">返回</button>
+        <div class="button col-md-9 top-back">
+            <button class="btn btn-default center-block" type="button" onclick="history.back()">返回</button>
         </div>
     </form>
 </div>

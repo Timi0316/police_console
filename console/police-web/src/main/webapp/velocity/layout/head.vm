@@ -1,30 +1,25 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-brand">武警支队运营管理后台</span>
+            <span class="navbar-brand">用户 admin</span>
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".nav-div">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">System Console</a>
         </div>
-        <div class="navbar-collapse collapse">
-        ##            动态菜单
-            <ul class="nav navbar-nav" id="navbar"></ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">
-                    ${CURRENT_USER.fullName} (
-                    #foreach ($element in $CURRENT_USER.roles)
-                        $element.roleName
-                    #end
-                    )</a></li>
-                <li><a href="#">$LOGIN_DATE</a></li>
-                <li><a href="#springUrl('/')">注销</a></li>
+        <div class="collapse navbar-collapse pull-right nav-div">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a class="text-muted">登录</a>
+                </li>
+                <li>
+                    <a class="text-muted">注销</a>
+                </li>
             </ul>
         </div>
-        <!--/.nav-collapse -->
     </div>
 </nav>
+<script src="#springUrl('/js/widgets/bootstrap/jquery.min.js')"></script>
+<script src="#springUrl('/js/widgets/bootstrap/bootstrap.min.js')"></script>

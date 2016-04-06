@@ -42,6 +42,9 @@
     <mappers>
 		<mapper resource="/mybatis/mapper/UserEntityMapper.xml" />
 		<mapper resource="/mybatis/mapper/DynamicEntityMapper.xml" />
+		<mapper resource="/mybatis/mapper/BarEntityMapper.xml" />
     </mappers>
-	
+
+
+
 </configuration>

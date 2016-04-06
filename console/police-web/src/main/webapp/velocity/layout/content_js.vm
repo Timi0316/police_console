@@ -7,7 +7,8 @@
 ##<script src="#springUrl('/resources/js/bootstrap/ie-emulation-modes-warning.js')"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 ##<script src="#springUrl('/resources/js/bootstrap/ie10-viewport-bug-workaround.js')"></script>
-##<script src="#springUrl('/resources/js/widgets/datepicker/locales/bootstrap-datetimepicker.zh-CN.js')" charset="UTF-8"></script>
+<script src="#springUrl('/js/widgets/datepicker/bootstrap-datetimepicker.js')" charset="UTF-8"></script>
+<script src="#springUrl('/js/widgets/datepicker/locales/bootstrap-datetimepicker.zh-CN.js')" charset="UTF-8"></script>
 
 
 

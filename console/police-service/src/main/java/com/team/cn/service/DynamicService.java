@@ -4,8 +4,10 @@ import com.team.cn.domain.Dynamic;
 import com.team.cn.entity.DynamicEntity;
 import com.team.cn.mapper.DynamicEntityMapper;
 import com.team.cn.utils.ConsoleUtils;
+import com.team.cn.utils.DateUtils;
 import jodd.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +26,9 @@ import java.util.Map;
 @Service
 public class DynamicService {
 
+    @Value("${page.size}")
+    private int pageSize;
+
     @Autowired
     private DynamicEntityMapper dynamicEntityMapper;
 
@@ -34,18 +39,38 @@ public class DynamicService {
      * 查询总页数
      * @param beginDate
      * @param endDate
-     * @param pageSize
      * @return
      */
-    public int selectDynamicSize(String beginDate, String endDate, int pageSize) {
+    public int selectDynamicSize(String beginDate, String endDate) {
         int count = dynamicEntityMapper.selectSizeByPage(buildParam(beginDate, endDate));
         int size = count%pageSize==0?count/pageSize:count/pageSize+1;
         return size;
     }
 
-    public List<Dynamic> selectDynamicByPage(String beginDate, String endDate, int pageNum, int pageSize) {
+    public List<Dynamic> selectDynamicByPage(String beginDate, String endDate, int pageNum) {
         int pageNo = (pageNum - 1) * pageSize;
         List<DynamicEntity> dynamicEntityList = dynamicEntityMapper.selectDynamicByPage(buildParam(beginDate, endDate, pageNo, pageSize));
+        return generateDynamic(dynamicEntityList);
+    }
+
+    /**
+     * 默认条件的总页数
+     *
+     * @return
+     */
+    public int selectDefalutSize() {
+        int count = dynamicEntityMapper.selectSizeByPage(buildParam());
+        int size = count%pageSize==0?count/pageSize:count/pageSize+1;
+        return size;
+    }
+
+    /**
+     * 默认条件的记录数
+     *
+     * @return
+     */
+    public List<Dynamic> selectDefualtByPage() {
+        List<DynamicEntity> dynamicEntityList = dynamicEntityMapper.selectDynamicByPage(buildParam(1, pageSize));
         return generateDynamic(dynamicEntityList);
     }
 
@@ -100,25 +125,37 @@ public class DynamicService {
 
     private Map<String, Object> buildParam(String beginDate, String endDate) {
         Map<String, Object> paramMap = new HashMap<String, Object>();
-        if(!StringUtil.isEmpty(beginDate)){
-            paramMap.put("beginDate", beginDate);
+        if(!StringUtil.isEmpty(beginDate)) {
+            paramMap.put("beginDate", DateUtils.format(beginDate));
         }
         if(!StringUtil.isEmpty(endDate)){
-            paramMap.put("endDate", endDate);
+            paramMap.put("endDate", DateUtils.format(endDate));
         }
         return paramMap;
     }
 
     private Map<String, Object> buildParam(String beginDate, String endDate, int pageNo, int pageSize) {
         Map<String, Object> paramMap = new HashMap<String, Object>();
-        if(!StringUtil.isEmpty(beginDate)){
-            paramMap.put("beginDate", beginDate);
+        if(!StringUtil.isEmpty(beginDate)) {
+            paramMap.put("beginDate", DateUtils.format(beginDate));
         }
         if(!StringUtil.isEmpty(endDate)){
-            paramMap.put("endDate", endDate);
+            paramMap.put("endDate", DateUtils.format(endDate));
         }
         paramMap.put("pageNo", pageNo);
         paramMap.put("pageSize", pageSize);
+        return paramMap;
+    }
+
+    private Map<String, Object> buildParam(int pageNo, int pageSize) {
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("pageNo", pageNo);
+        paramMap.put("pageSize", pageSize);
+        return paramMap;
+    }
+
+    private Map<String, Object> buildParam() {
+        Map<String, Object> paramMap = new HashMap<String, Object>();
         return paramMap;
     }
 

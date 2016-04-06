@@ -10,10 +10,11 @@
 <!-- head-->
     #parse('/layout/head.vm')
 <!-- left -->
+<div class="col-md-3">
     #parse('/layout/nav_left.vm')
-
+</div>
 <!--content -->
-<div class="content">
+<div class="col-md-9 content">
     <div class="page-header">
         <h1>
             警务动态 > 添加
@@ -21,14 +22,14 @@
     </div>
     <form action="#springUrl('/dynamic/dynamic_edit_submit.htm')" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="$!{dynamic.id}">
-        <div class="title">
+        <div class="col-md-9">
             <div class="form-group">
                 <label for="title">标题</label>
                 <input name="title" type="text" class="form-control" id="title"
                        value="$!{dynamic.title}">
             </div>
         </div>
-        <div class="image">
+        <div class="col-md-9">
 
             <div class="form-group">
                 <label for="image">图片</label>
@@ -38,15 +39,15 @@
                 <input type="file"  name="imageFile" id="dynamic_image_file" onchange="addImage('dynamic_image_file','dynamic_img');">
             </div>
         </div>
-        <div class="content">
+        <div class="col-md-9">
             <div class="form-group">
                 <label for="content">内容</label>
-                <textarea name="content" class="form-control" id="content" >$!{dynamic.content}</textarea>
+                <textarea name="content" class="form-control" id="content" style="height: 500px;">$!{dynamic.content}</textarea>
             </div>
 
         </div>
-        <div class="button">
-            <button class="btn" type="submit">提交</button>
+        <div class="button col-md-9 text-center">
+            <button class="btn btn-default" type="submit">提交</button>
             <button class="btn" type="button" onclick="history.back()">上一步</button>
         </div>
     </form>

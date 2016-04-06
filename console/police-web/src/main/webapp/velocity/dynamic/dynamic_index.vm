@@ -2,92 +2,123 @@
 <html>
 <head>
     <title>System Console</title>
+    <link href="#springUrl('/css/business/content.css')" rel="stylesheet"/>
     #parse('/layout/content_css.vm')
 </head>
 
 <body role="document">
 <!-- head-->
     #parse('/layout/head.vm')
-<!-- left -->
-    #parse('/layout/nav_left.vm')
 
+<!-- left -->
+<div class="col-md-3">
+    #parse('/layout/nav_left.vm')
+</div>
 <!--content -->
-<div class="content">
+<div class="col-md-9 container">
     <div class="page-header">
         <h1>
             警务动态
         </h1>
     </div>
-    <div>
-        <label>起始时间 ： </label> <input type="text"/>
-        <label>结束时间 ： </label> <input type="text"/>
-        <button class="btn" type="button">查询</button>
-        <button class="btn" type="button" onclick="addDynamic('#springUrl('/dynamic/add.htm')')">添加</button>
-    </div>
-    #if($!{size} == 0)
-        暂无警务动态
-    #else
-        <table class="table  table-hover">
-            <thead>
-            <tr>
-                <th>
-                    序号
-                </th>
-                <th>
-                    时间
-                </th>
-                <th>
-                    标题
-                </th>
-                <th>
-                    操作
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-                #foreach(${dynamic} in $!{dynamicList})
-                <tr style="text-align: center;">
-                   <td>
-                        ${dynamic.id}
-                   </td>
-                    <td>
-                        ${dynamic.date}
-                    </td>
-                    <td>
-                        ${dynamic.title}
-                    </td>
-                    <td>
-                        <button  class="btn" type="button" onclick="editDynamic('#springUrl('/dynamic/edit.htm')','${dynamic.id}')">编辑</button>
-                        <button  class="btn" type="button" onclick="deleteDynamic('#springUrl('/dynamic/delete.htm')','${dynamic.id}')" >删除</button>
-                        <button  class="btn" type="button" onclick="previewDynamic('#springUrl('/dynamic/preview.htm')','${dynamic.id}')" >预览</button>
+    <form id="search-form" class="form-inline" role="form" action="#springUrl('/dynamic/search.htm')" method="post">
 
-                    </td>
-                </tr>
-                #end
-            </tbody>
-        </table>
-        <div class="table-foot">
-            <ul class="pagination">
-                <li>
-                    <a href="#">上一页</a>
-                </li>
-                #foreach(${num} in [1..$!{size}])
-                    <li>
-                        <a href="#">$!{num}</a>
-                    </li>
-                #end
-                <li>
-                    <a href="#">下一页</a>
-                </li>
-            </ul>
+        <div class="col-md-4">
+            <label>起始时间 ： </label>
+            <input name="beginDate" type="text" value="$!{beginDate}" class="form-control form_date" data-date=""
+                   data-date-format="yyyy-mm-dd"/>
         </div>
-    #end
+        <div class="col-md-4">
+            <label>结束时间 ： </label>
+            <input name="endDate" type="text" value="$!{endDate}" class="form-control form_date" data-date=""
+                   data-date-format="yyyy-mm-dd"/>
+        </div>
+        <input id="pageNum" name="pageNum" type="hidden" value="${pageNum}"/>
 
+        <div class="col-md-4">
+            <button class="btn" type="submit">查询</button>
+            <button class="btn" type="button" onclick="addDynamic('#springUrl('/dynamic/add.htm')')">添加</button>
+        </div>
+    </form>
+    <div class="div-data">
+        #if($!{size} == 0)
+            暂无警务动态
+        #else
+            <table class="table  table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>
+                        序号
+                    </th>
+                    <th>
+                        时间
+                    </th>
+                    <th>
+                        标题
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    #foreach(${dynamic} in $!{dynamicList})
+                    <tr style="text-align: center;">
+                        <td>
+                            ${velocityCount}
+                        </td>
+                        <td>
+                            ${dynamic.date}
+                        </td>
+                        <td>
+                            ${dynamic.title}
+                        </td>
+                        <td>
+                            <button class="btn" type="button"
+                                    onclick="editDynamic('#springUrl('/dynamic/edit.htm')','${dynamic.id}')">编辑
+                            </button>
+                            <button class="btn" type="button"
+                                    onclick="deleteDynamic('#springUrl('/dynamic/delete.htm')','${dynamic.id}')">删除
+                            </button>
+                            <button class="btn" type="button"
+                                    onclick="previewDynamic('#springUrl('/dynamic/preview.htm')','${dynamic.id}')">预览
+                            </button>
+
+                        </td>
+                    </tr>
+                    #end
+                </tbody>
+            </table>
+            <div class="table-foot">
+                <ul class="pagination">
+                    <li>
+                        <a href="javascript:;" onclick="previewPage('search-form','#springUrl("/dynamic/page.htm")')">上一页</a>
+                    </li>
+                    #foreach(${num} in [1..$!{size}])
+                        <li>
+                            #if(${num} == ${pageNum})
+                                <span class="text-muted">$!{num}</span>
+                            #else
+                                <a href="javascript:;" onclick="specificPage('${num}','search-form','#springUrl(
+                                    "/dynamic/page.htm")')">$!{num}</a>
+                            #end
+                        </li>
+                    #end
+                    <li>
+                        <a href="javascript:;"
+                           onclick="nextPage('${size}','search-form','#springUrl("/dynamic/page.htm")')">下一页</a>
+                    </li>
+                </ul>
+            </div>
+        #end
+    </div>
 
 </div>
 
 <!-- js -->
     #parse('/layout/content_js.vm')
-    <script src="#springUrl('/js/business/dynamic/dynamic.js')"></script>
+<script src="#springUrl('/js/business/dynamic/dynamic.js')"></script>
+<script src="#springUrl('/js/business/admin/admin.js')"></script>
+<script src="#springUrl('/js/business/admin/page.js')"></script>
 </body>
 </html>

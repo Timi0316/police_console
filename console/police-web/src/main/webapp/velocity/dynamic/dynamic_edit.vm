@@ -10,32 +10,35 @@
 <!-- head-->
     #parse('/layout/head.vm')
 <!-- left -->
+<div class="col-md-3">
     #parse('/layout/nav_left.vm')
+</div>
+
 
 <!--content -->
-<div class="content">
+<div class="col-md-9 content">
     <div class="page-header">
         <h1>
             警务动态 > 添加
         </h1>
     </div>
     <form action="#springUrl('/dynamic/add_next.htm')" method="post">
-        <div class="title">
+        <div class="col-md-9">
             <div class="form-group">
                 <label for="title">标题</label>
                 <input name="title" type="text" class="form-control" id="title"
                        value="${dynamic.title}">
             </div>
         </div>
-        <div class="content">
+        <div class="col-md-9">
             <div class="form-group">
                 <label for="content">内容</label>
-                <textarea name="content" class="form-control" id="content" >${dynamic.content}</textarea>
+                <textarea name="content" class="form-control" id="content" style="height: 500px;">${dynamic.content}</textarea>
             </div>
 
         </div>
-        <div class="button">
-            <button class="btn" type="submit">下一步</button>
+        <div class="button col-md-9 text-center">
+            <button class="btn btn-default" type="submit">下一步</button>
             <button class="btn" type="button" onclick="history.back()">取消</button>
         </div>
     </form>
